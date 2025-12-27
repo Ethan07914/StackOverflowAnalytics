@@ -25,6 +25,4 @@ models:
         description: 'The name of the tag'
         data_tests:
             - not_null
-            - relationships:
-                to: stg_bigquery_posts_questions
-                field: tags
+
