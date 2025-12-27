@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_bigquery_posts_questions
+    description: 'posts questions table with only necessary columns'
+    columns:
+      - name: id
+        description: 'The primary key for this table'
+        data_tests:
+          - unique
+          - not_null
+      - name: creation_date
+        description: 'When the question was initially posted'
+        data_tests:
+            - not_null
+  - name: stg_bigquery_tags
+    description: 'tags table with only necessary columns'
+    columns:
+      - name: id
+        description: 'The primary key for this table'
+        data_tests:
+          - unique
+          - not_null
+      - name: tag_name
+        description: 'The name of the tag'
+        data_tests:
+            - not_null
+            - relationships:
+                to: stg_bigquery_posts_questions
+                field: tags
