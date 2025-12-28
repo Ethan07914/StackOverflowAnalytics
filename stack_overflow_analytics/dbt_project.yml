@@ -32,5 +32,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   stack_overflow_analytics:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    warehouse:
       +materialized: view
+    +materialized: table
+

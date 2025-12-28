@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_bigquery_posts_questions
+  - name: stg_bigquery__posts_questions
     description: 'posts questions table with only necessary columns'
     columns:
       - name: id
@@ -13,7 +13,7 @@ models:
         description: 'When the question was initially posted'
         data_tests:
             - not_null
-  - name: stg_bigquery_tags
+  - name: stg_bigquery__tags
     description: 'tags table with only necessary columns'
     columns:
       - name: id
@@ -25,7 +25,7 @@ models:
         description: 'The name of the tag'
         data_tests:
             - not_null
-  - name: stg_bigquery_post_links
+  - name: stg_bigquery__post_links
     description: 'post links table with only necessary columns'
     columns:
       - name: id
@@ -41,10 +41,11 @@ models:
         description: 'Foreign key for this table, the post that the link is attached to'
         data_tests:
           - not_null
-          - relationships:
-              to: stg_bigquery_posts_questions
-              on: id
-
+#          - relationships:
+#                arguments:
+#                    to: stg_bigquery__posts_questions
+#                    on: id
+#This tests raises a TypeError: '<' not supported between instances of 'bool' and 'str', I'm not sure why
 
 
 

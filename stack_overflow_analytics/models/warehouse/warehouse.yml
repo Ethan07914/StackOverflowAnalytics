@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: topic_fct.yml
+    description: 'Topics table ordered by most trending'
+    columns:
+      - name: id
+        description: 'The primary key for this table'
+        data_tests:
+          - unique
+          - not_null
+      - name: topic
+        description: 'The name of the tag'
+        data_tests:
+            - not_null
+      - name: month_name
+        description: 'The name of the month'
+        data_tests:
+            - not_null
