@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: int__posts_questions__filtered.sql
+    description: 'posts questions table filtered to only posts in 2019'
+    columns:
+      - name: id
+        description: 'The primary key for this table'
+        data_tests:
+          - unique
+          - not_null
+      - name: creation_date
+        description: 'When the question was initially posted'
+        data_tests:
+            - not_null
+      - name: month_name
+        description: 'The name of the month'
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['January',
+                       'February',
+                       'March',
+                       'April',
+                       'May',
+                       'June',
+                       'July',
+                       'August',
+                       'September',
+                       'October',
+                       'November',
+                       'December']
+  - name: 'int__post__joined'
+    description: 'The posts questions and post links table joined'
+    columns:
+      - name: id
+        description: 'The primary key for this table'
+        data_tests:
+          - unique
+          - not_null
+  - name: 'int__tag__joined'
+    description: 'Table that holds facts about each tag by month'
+    columns:
+      - name: id
+        description: 'The primary key for this table'
+        data_tests:
+          - unique
+          - not_null
+      - name: tag_name
+        description: 'The name of the tag'
+        data_tests:
+            - not_null
+      - name: month_name
+        description: 'The name of the month'
+        data_tests:
+            - not_null
