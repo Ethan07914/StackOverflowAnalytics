@@ -1,25 +1,32 @@
 with posts as (
   select *
-      from {{ ref('int__post__joined')}}),
+      from {{ ref('int__post__joined')
+      }}),
+
+posts_with_tags as (
+ select posts.*,
+        tag
+     from posts,
+     UNNEST(SPLIT(posts.tags, '|')) AS tag
+ ),
 
 tags as (
    select *
-      from {{ ref('stg_bigquery_tags') }}),
+      from {{ ref('stg_bigquery__tags') }}),
 
 final as (
    select
-          CONCAT(tags.tag_name, '_', posts.month_name) as id,
+          CONCAT(tags.tag_name, '_', pwt.month_name) as id,
           tags.tag_name,
-          posts.month_name,
-          count(posts.id) as questions,
-          sum(posts.answer_count) as answers,
-          sum(posts.view_count) as views,
-          sum(posts.link_count) as links
+          pwt.month_name,
+          count(pwt.id) as unanswered_questions,
+          sum(pwt.view_count) as views,
+          sum(pwt.link_count) as links
               from tags
-              left join posts
-              on tags.tag_name in UNNEST(SPLIT(posts.tags, '|'))
-  group by id)
+              inner join posts_with_tags as pwt
+              on tags.tag_name = pwt.tag
+  group by id, tags.tag_name, pwt.month_name)
 
 
 select * from final
- order by questions desc, answers asc
+ order by unanswered_questions desc

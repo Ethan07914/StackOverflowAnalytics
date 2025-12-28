@@ -4,7 +4,7 @@ stack_overflow_analytics:
       dataset: stack_overflow_analytics
       job_execution_timeout_seconds: 300
       job_retries: 1
-      keyfile: \Users\ethan\.dbt\stack_overflow_analytics.json
+      keyfile: C:\Users\ethan\.dbt\stack_overflow_analytics.json
       location: US
       method: service-account
       priority: interactive
